@@ -5,7 +5,7 @@
 #include <sys/time.h>
 
 
-void generateData(void** array, int n, int m, int flag){
+void generateData(void** array, unsigned long n, int m, int flag){
     /* generate random data
    the array size is n
    the number range size is M
@@ -30,30 +30,50 @@ void generateData(void** array, int n, int m, int flag){
     }
 }
 
-void calculate(int element, int target[], int length){
+void calculate(int element, int* target, int length){
   /*
   Single process calculation of execution time
   */
-
-    struct timeval start, end;
-    int count = 0;
-    gettimeofday(&start, NULL);
-    for (int i = 0; i< length; i++){
-        if (target[i] == element){
-          count += 1;
-        }
+  struct timeval start, end;
+  int count = 0;
+  gettimeofday(&start, NULL);
+  for (int i = 0; i < length; i++) {
+    if (target[i] == element) {
+      count += 1;
+    }
     }
     gettimeofday(&end, NULL);
+    unsigned long sec = end.tv_sec - start.tv_sec;
+    unsigned long usec = end.tv_usec - start.tv_usec;
+    printf("during: %ld sec\n %ld usec\n", sec, usec);
     unsigned long duringTime = (end.tv_sec-start.tv_sec) * 1000000 + (end.tv_usec-start.tv_usec);
     printf("the elemet number is: %d\nthe time using is: %ld microsecond\n", count, duringTime);
 }
+
+
+void mutiProcessCalculate(int element, int target[], int length, int mutinum){
+  /*
+  Multi-process computing
+  length is the array size
+  mutinum is the number of child process
+  */
+}
+
+void mutiThreadCalculate(int element, int target[], int length, int mutinum){
+  /*
+  Multi-Tread computing
+  length is the array size
+  mutinum is the number of child thread
+  */
+}
+
 int main()
 {
     void *num;
-    int n = 100000;
+    unsigned long n = 100000000;
     int m = 500;
     generateData(&num, n, m, 1);
-    calculate(105, (int *)num, n);
+    calculate(105, (int*) num, n);
     free(num);
     return 0;
 }
