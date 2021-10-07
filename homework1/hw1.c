@@ -43,11 +43,9 @@ void calculate(int element, int* target, int length){
     }
     }
     gettimeofday(&end, NULL);
-    unsigned long sec = end.tv_sec - start.tv_sec;
-    unsigned long usec = end.tv_usec - start.tv_usec;
-    printf("during: %ld sec\n %ld usec\n", sec, usec);
-    unsigned long duringTime = (end.tv_sec-start.tv_sec) * 1000000 + (end.tv_usec-start.tv_usec);
-    printf("the elemet number is: %d\nthe time using is: %ld microsecond\n", count, duringTime);
+    useconds_t msec = end.tv_usec-start.tv_usec;
+    time_t sec = end.tv_sec-start.tv_sec;
+    printf("the elemet number is: %d\ntime used:%lld.%us\n", count, sec, msec);
 }
 
 
