@@ -45,7 +45,10 @@ void calculate(int element, int* target, int length){
     gettimeofday(&end, NULL);
     useconds_t msec = end.tv_usec-start.tv_usec;
     time_t sec = end.tv_sec-start.tv_sec;
-    printf("the elemet number is: %d\ntime used:%lld.%us\n", count, sec, msec);
+    printf("start: %ld.%lu\n", start.tv_sec, start.tv_usec);
+    printf("end: %ld.%lu\n", end.tv_sec, end.tv_usec);
+    printf("the array size is: %d\nthe elemet number is: %d\n", length, count);
+    printf("single process time used:%lld.%us\n", sec, msec);
 }
 
 
@@ -53,7 +56,7 @@ void mutiProcessCalculate(int element, int target[], int length, int mutinum){
   /*
   Multi-process computing
   length is the array size
-  mutinum is the number of child process
+  mutinum is the number of child process, restricted to multiples of 2
   */
 }
 
@@ -61,17 +64,18 @@ void mutiThreadCalculate(int element, int target[], int length, int mutinum){
   /*
   Multi-Tread computing
   length is the array size
-  mutinum is the number of child thread
+  mutinum is the number of child thread,restricted to multiples of 2
   */
 }
 
 int main()
 {
     void *num;
-    unsigned long n = 100000000;
-    int m = 500;
+    int m = 200; // the range of number
+    unsigned long n = 4096; // the array number
     generateData(&num, n, m, 1);
-    calculate(105, (int*) num, n);
+    int *number = (int *)num;
+    calculate(*(number+10), number, n);
     free(num);
     return 0;
 }
