@@ -26,144 +26,75 @@ Number of threads |   2, 4, 6, 8
 The following list shows the execution times for different array sizes
 
 * Array length: 256 
-    - multi-process
-  
-     Number of processes | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |3
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+   Single process execution time: 1 (us)
+    - multi-process and multi-threads execution time table list:
 
-    - multi-thread
-
-    Number of threads    | execution times (us)  | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    :---:|:---:| :---: | :---: |
+    2  | 825 |615  | 5322
+    4  | 4813 |2909 | 6782
+    6  | 4921 |6098 | 13089 
+    8  | 3103 |16799 | 6530
 
 * Array length: 512
-  - multi-process
-  
-     Number of processes | execution times (us)  | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+   Single process execution time: 2 (us)
+  - multi-process and multi-threads execution time table list:
 
-    - multi-thread
+    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    :---:|:---:| :---: | :---: |
+    2  |  |  | 
+    4  |  |  | 
+    6  |  |  |  
+    8  |  |  | 
 
-    Number of threads    | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
 
 * Array length: 1024
-  - multi-process
-  
-     Number of processes | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+    Single process execution time: 
+  - multi-process and multi-threads execution time table list:
 
-    - multi-thread
-
-    Number of threads    | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    :---:|:---:| :---: | :---: |
+    2  |  |  | 
+    4  |  |  | 
+    6  |  |  |  
+    8  |  |  | 
 * Array length: 2048
-  - multi-process
-  
-     Number of processes | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+  Single process execution time: 
+  - multi-process and multi-threads execution time table list:
 
-    - multi-thread
-
-    Number of threads    | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    :---:|:---:| :---: | :---: |
+    2  |  |  | 
+    4  |  |  | 
+    6  |  |  |  
+    8  |  |  | 
 * Array length: 4096
-  - multi-process
-  
-     Number of processes | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+  Single process execution time: 
+  - multi-process and multi-threads execution time table list:
 
-    - multi-thread
-
-    Number of threads    | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    :---:|:---:| :---: | :---: |
+    2  |  |  | 
+    4  |  |  | 
+    6  |  |  |  
+    8  |  |  | 
 * Array length: 8192
-  - multi-process
-  
-     Number of processes | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+  Single process execution time: 
+  - multi-process and multi-threads execution time table list:
 
-    - multi-thread
-
-    Number of threads    | execution times  | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    :---:|:---:| :---: | :---: |
+    2  |  |  | 
+    4  |  |  | 
+    6  |  |  |  
+    8  |  |  | 
 * Array length: 16384
-  - multi-process
-  
-     Number of processes | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+  Single process execution time: 
+  - multi-process and multi-threads execution time table list:
 
-    - multi-thread
-
-    Number of threads    | execution times (us) | 
-    :----------------:   |:----------------:|
-    1                    |
-    2                    |
-    4                    |
-    6                    |
-    8                    |
+    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    :---:|:---:| :---: | :---: |
+    2  |  |  | 
+    4  |  |  | 
+    6  |  |  |  
+    8  |  |  | 
