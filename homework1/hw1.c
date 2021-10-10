@@ -1,15 +1,17 @@
 #include<stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <time.h>
 #include <sys/time.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <pthread.h>
 
-struct timeval start, end;
+#define TIC struct timeval start, end; gettimeofday(&start, NULL);
 
-void generateData(void** array, unsigned long n, int m, int flag){
+#define TOC gettimeofday(&end, NULL); double elapsedTime = (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_usec - start.tv_usec) / 1000.0; printf("time used: %lf (ms)\n", elapsedTime);
+
+
+void generateData(void **array, unsigned long n, int m, int flag){
     /* generate random data
    the array size is n
    the number range size is M
@@ -38,22 +40,15 @@ void calculate(int element, int* target, int length){
   /*
   Single process calculation of execution time
   */
-  int count = 0;
-  gettimeofday(&start, NULL);
+  printf("single process\n");
+  TIC int count = 0;
   for (int i = 0; i < length; i++) {
     if (target[i] == element) {
       count += 1;
     }
     }
-    gettimeofday(&end, NULL);
-    time_t msec = end.tv_usec-start.tv_usec;
-    time_t sec = end.tv_sec-start.tv_sec;
-    // printf("start: %ld.%lu\n", start.tv_sec, start.tv_usec);
-    // printf("end: %ld.%lu\n", end.tv_sec, end.tv_usec);
-    printf("the array size is: %d\nthe elemet number is: %d\n", length, count);
-    // printf("single process time used:%ld.%lds\n", sec, msec);
-    printf("single process time used:%ldus\n", ((end.tv_sec * 1000000 + end.tv_usec)
-		  - (start.tv_sec * 1000000 + start.tv_usec)));
+  TOC
+  printf("the element number is: %d\n", count);
 }
 
 
@@ -66,8 +61,8 @@ void multiProcessCalculate(int element, int target[], int length, int mutinum){
   int count = 0; // parent process count
   int subCount; // child process count
   int interval = length / mutinum;
-  printf("child process number is %d\n", mutinum);
-  gettimeofday(&start, NULL);
+  printf("Multi-process number: %d\n", mutinum);
+  TIC
   for (int i = 0; i < mutinum; i++)
   {
     int pid = fork();
@@ -93,17 +88,10 @@ void multiProcessCalculate(int element, int target[], int length, int mutinum){
       // printf("end child pid: %d  recoive number: %d\n", endPid, subCount/256);
       count += subCount / 256;
      }
-     gettimeofday(&end, NULL);
-     time_t msec = end.tv_usec-start.tv_usec;
-     time_t sec = end.tv_sec-start.tv_sec;
-    //  printf("start: %ld.%lu\n", start.tv_sec, start.tv_usec);
-    //  printf("end: %ld.%lu\n", end.tv_sec, end.tv_usec);
-     printf("the array size is: %d\nthe elemet number is: %d\n", length, count);
-    //  printf("multi-process time used:%ld.%lds\n", sec, msec);
-     printf("multi-process time used:%ldus\n", ((end.tv_sec * 1000000 + end.tv_usec)
-		  - (start.tv_sec * 1000000 + start.tv_usec)));
-     
+     TOC
+     printf("the element number is: %d\n", count);
 }
+
 
 void multiThreadCalculateLock(int element, int target[], int length, int mutinum){
   /*
@@ -111,24 +99,24 @@ void multiThreadCalculateLock(int element, int target[], int length, int mutinum
   length is the array size
   mutinum is the number of child thread,restricted to multiples of 2
   */
-  static int counts = 0;
+  int count = 0;
   int interval = length / mutinum;
   pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
   pthread_t Thread[mutinum];
-  printf("child thread with lock number is %d\n", mutinum);
+  printf("Multi-Tread (global) number: %d\n", mutinum);
   void *calculateLock(int step){
     // printf("child thread: %d\n", (int)pthread_self());
     for (int i = interval*step; i < interval*(step+1); i++){
       if (element == target[i]){
         pthread_mutex_lock(&lock);
-        counts++;
+        count++;
         pthread_mutex_unlock(&lock);
       }
     }
     return NULL;
   }
 
-  gettimeofday(&start, NULL);
+  TIC
   for (int i = 0; i < mutinum; i++){
     pthread_t thread;
     int err = pthread_create(&thread, NULL, calculateLock, i);
@@ -141,12 +129,8 @@ void multiThreadCalculateLock(int element, int target[], int length, int mutinum
   for (int i = 0; i < mutinum; i++){
     pthread_join(Thread[i], NULL);
   }
-  gettimeofday(&end, NULL);
-  time_t msec = end.tv_usec-start.tv_usec;
-  time_t sec = end.tv_sec-start.tv_sec;
-  printf("the array size is: %d\nthe elemet number is: %d\n", length, counts);
-  // printf("multi-thread with lock time used:%ld.%lds\n", sec, msec);
-  printf("multi-thread with lock time used:%ldus\n", ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec)));
+  TOC
+  printf("the element number is: %d\n", count);
 }
 
 
@@ -159,7 +143,7 @@ void multiThreadCalculateExit(int element, int target[], int length, int mutinum
   int interval = length / mutinum;
   int count = 0;
   pthread_t Thread[mutinum];
-  printf("child thread without lock number is %d\n", mutinum);
+  printf("Multi-Tread (exit) number: %d\n", mutinum);
   void *calculateExit(int step){
     // printf("child thread: %d\n", (int)pthread_self());
     int subCount = 0;
@@ -172,7 +156,7 @@ void multiThreadCalculateExit(int element, int target[], int length, int mutinum
     pthread_exit(subCount);
   }
 
-  gettimeofday(&start, NULL);
+  TIC
   for (int i = 0; i < mutinum; i++){
     pthread_t thread;
     int err = pthread_create(&thread, NULL, calculateExit, i);
@@ -187,20 +171,15 @@ void multiThreadCalculateExit(int element, int target[], int length, int mutinum
     pthread_join(Thread[i], &subCount);
     count += subCount;
   }
-  gettimeofday(&end, NULL);
-  time_t msec = end.tv_usec-start.tv_usec;
-  time_t sec = end.tv_sec-start.tv_sec;
-  printf("the array size is: %d\nthe elemet number is: %d\n", length, count);
-  // printf("multi-thread with not lock time used:%ld.%lds\n", sec, msec);
-  printf("multi-thread with  not lock time used:%ld us\n", ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec)));
-
+  TOC
+  printf("the element number is: %d\n", count);
 }
 
 
 int main()
 {
     int m = 200; // the range of number
-    unsigned long N[] = {256, 512, 1024, 2048, 4096, 8192, 16384}; // the array number
+    unsigned long N[] = {256, 512, 1024, 2048, 3072, 4096, 8192}; // the array number
     
     for (int i = 0; i < 7; i++)
     {
@@ -223,6 +202,5 @@ int main()
 
       free(num);
     }
-
-    return 0;
+  return 0;
 }
