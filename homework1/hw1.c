@@ -6,9 +6,14 @@
 #include <sys/wait.h>
 #include <pthread.h>
 
-#define TIC struct timeval start, end; gettimeofday(&start, NULL);
+#define TIC \
+struct timeval start, end; gettimeofday(&start, NULL);
 
-#define TOC gettimeofday(&end, NULL); double elapsedTime = (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_usec - start.tv_usec) / 1000.0; printf("time used: %lf (ms)\n", elapsedTime);
+#define TOC \
+gettimeofday(&end, NULL); \
+double elapsedTime = (end.tv_sec - start.tv_sec) * 1000.0\
+ + (end.tv_usec - start.tv_usec) / 1000.0; \
+printf("time used: %lf (ms)\n", elapsedTime);
 
 
 void generateData(void **array, unsigned long n, int m, int flag){
@@ -179,7 +184,7 @@ void multiThreadCalculateExit(int element, int target[], int length, int mutinum
 int main()
 {
     int m = 200; // the range of number
-    unsigned long N[] = {256, 512, 1024, 2048, 3072, 4096, 8192}; // the array number
+    unsigned long N[] = {256, 512, 1024, 2048, 3072, 4096, 8192, 32768}; // the array number
     
     for (int i = 0; i < 7; i++)
     {
