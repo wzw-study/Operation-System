@@ -18,7 +18,7 @@ I generate random arrays of integers of different lengths. The execution times o
 The parameters are listed in the table below.
 Array type        | Integer array |
 ----------        | -------------
-|Array length     |256, 512, 1024, 2048, 4096, 8192, 16384 |
+|Array length     |256, 512, 1024, 2048, 3072, 4096, 8192  |
 Number of processes | 2, 4, 6, 8
 Number of threads |   2, 4, 6, 8
 
@@ -26,21 +26,21 @@ Number of threads |   2, 4, 6, 8
 The following list shows the execution times for different array sizes
 
 * Array length: 256 
-   Single process execution time: 1 (us)
+   Single process execution time: 0.001 (ms). the element number is: 3
     - multi-process and multi-threads execution time table list:
 
-    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    Number of processes/threads | Used times (ms)<br> (process) | Used times (ms)<br> (thread with global counter) | Used times (ms)<br> (thread with pthread_exit) | 
     :---:|:---:| :---: | :---: |
-    2  | 825 |615  | 5322
-    4  | 4813 |2909 | 6782
-    6  | 4921 |6098 | 13089 
-    8  | 3103 |16799 | 6530
+    2  | 0.88 |0.571 |  6.51
+    4  | 11.482 |4.09 | 6.767
+    6  | 10.233 |1.452 | 16.268 
+    8  | 8.455 |13.023 | 7.24
 
 * Array length: 512
-   Single process execution time: 2 (us)
+   Single process execution time: 2 (ms)
   - multi-process and multi-threads execution time table list:
 
-    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    Number of processes/threads | Used times (ms)<br> (process) | Used times (ms)<br> (thread with global counter) | Used times (ms)<br> (thread with pthread_exit) | 
     :---:|:---:| :---: | :---: |
     2  |  |  | 
     4  |  |  | 
@@ -52,7 +52,7 @@ The following list shows the execution times for different array sizes
     Single process execution time: 
   - multi-process and multi-threads execution time table list:
 
-    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    Number of processes/threads | Used times (ms)<br> (process) | Used times (ms)<br> (thread with global counter) | Used times (ms)<br> (thread with pthread_exit) | 
     :---:|:---:| :---: | :---: |
     2  |  |  | 
     4  |  |  | 
@@ -62,7 +62,17 @@ The following list shows the execution times for different array sizes
   Single process execution time: 
   - multi-process and multi-threads execution time table list:
 
-    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    Number of processes/threads | Used times (ms)<br> (process) | Used times (ms)<br> (thread with global counter) | Used times (ms)<br> (thread with pthread_exit) |
+    :---:|:---:| :---: | :---: |
+    2  |  |  | 
+    4  |  |  | 
+    6  |  |  |  
+    8  |  |  | 
+* Array length: 3072
+  Single process execution time: 
+  - multi-process and multi-threads execution time table list:
+
+    Number of processes/threads | Used times (ms)<br> (process) | Used times (ms)<br> (thread with global counter) | Used times (ms)<br> (thread with pthread_exit) | 
     :---:|:---:| :---: | :---: |
     2  |  |  | 
     4  |  |  | 
@@ -72,7 +82,7 @@ The following list shows the execution times for different array sizes
   Single process execution time: 
   - multi-process and multi-threads execution time table list:
 
-    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    Number of processes/threads | Used times (ms)<br> (process) | Used times (ms)<br> (thread with global counter) | Used times (ms)<br> (thread with pthread_exit) |
     :---:|:---:| :---: | :---: |
     2  |  |  | 
     4  |  |  | 
@@ -82,17 +92,7 @@ The following list shows the execution times for different array sizes
   Single process execution time: 
   - multi-process and multi-threads execution time table list:
 
-    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
-    :---:|:---:| :---: | :---: |
-    2  |  |  | 
-    4  |  |  | 
-    6  |  |  |  
-    8  |  |  | 
-* Array length: 16384
-  Single process execution time: 
-  - multi-process and multi-threads execution time table list:
-
-    Number of processes/threads | Used times (us)<br> (process) | Used times (us)<br> (thread with global counter) | Used times (us)<br> (thread with pthread_exit) | 
+    Number of processes/threads | Used times (ms)<br> (process) | Used times (ms)<br> (thread with global counter) | Used times (ms)<br> (thread with pthread_exit) |
     :---:|:---:| :---: | :---: |
     2  |  |  | 
     4  |  |  | 

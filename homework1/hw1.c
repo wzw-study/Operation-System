@@ -186,6 +186,7 @@ int main()
       void *num;
       generateData(&num, N[i], m, 1);
       int *number = (int *)num;
+      printf("--------------array size: %d----------\n", N[i]);
       printf("One process result\n");
       printf("------------------------\n");
       calculate(*(number + 10), number, N[i]);
@@ -199,6 +200,7 @@ int main()
         printf("-------------------------\n");
         multiThreadCalculateExit(*(number + 10), number, N[i], j);
       }
+      printf("------------------------------------------\n");
 
       free(num);
     }
