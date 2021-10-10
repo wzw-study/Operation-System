@@ -51,7 +51,7 @@ void calculate(int element, int* target, int length){
     // printf("start: %ld.%lu\n", start.tv_sec, start.tv_usec);
     // printf("end: %ld.%lu\n", end.tv_sec, end.tv_usec);
     printf("the array size is: %d\nthe elemet number is: %d\n", length, count);
-    printf("single process time used:%ld.%lds\n", sec, msec);
+    // printf("single process time used:%ld.%lds\n", sec, msec);
     printf("single process time used:%ldus\n", ((end.tv_sec * 1000000 + end.tv_usec)
 		  - (start.tv_sec * 1000000 + start.tv_usec)));
 }
@@ -99,7 +99,7 @@ void multiProcessCalculate(int element, int target[], int length, int mutinum){
     //  printf("start: %ld.%lu\n", start.tv_sec, start.tv_usec);
     //  printf("end: %ld.%lu\n", end.tv_sec, end.tv_usec);
      printf("the array size is: %d\nthe elemet number is: %d\n", length, count);
-     printf("multi-process time used:%ld.%lds\n", sec, msec);
+    //  printf("multi-process time used:%ld.%lds\n", sec, msec);
      printf("multi-process time used:%ldus\n", ((end.tv_sec * 1000000 + end.tv_usec)
 		  - (start.tv_sec * 1000000 + start.tv_usec)));
      
@@ -116,8 +116,7 @@ void multiThreadCalculateLock(int element, int target[], int length, int mutinum
   pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
   pthread_t Thread[mutinum];
   printf("child thread with lock number is %d\n", mutinum);
-  void *calculateLock(int step)
-  {
+  void *calculateLock(int step){
     // printf("child thread: %d\n", (int)pthread_self());
     for (int i = interval*step; i < interval*(step+1); i++){
       if (element == target[i]){
@@ -146,7 +145,7 @@ void multiThreadCalculateLock(int element, int target[], int length, int mutinum
   time_t msec = end.tv_usec-start.tv_usec;
   time_t sec = end.tv_sec-start.tv_sec;
   printf("the array size is: %d\nthe elemet number is: %d\n", length, counts);
-  printf("multi-thread with lock time used:%ld.%lds\n", sec, msec);
+  // printf("multi-thread with lock time used:%ld.%lds\n", sec, msec);
   printf("multi-thread with lock time used:%ldus\n", ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec)));
 }
 
@@ -161,8 +160,7 @@ void multiThreadCalculateExit(int element, int target[], int length, int mutinum
   int count = 0;
   pthread_t Thread[mutinum];
   printf("child thread without lock number is %d\n", mutinum);
-  void *calculateExit(int step)
-  {
+  void *calculateExit(int step){
     // printf("child thread: %d\n", (int)pthread_self());
     int subCount = 0;
     for (int i = interval * step; i < interval * (step + 1); i++)
@@ -193,7 +191,7 @@ void multiThreadCalculateExit(int element, int target[], int length, int mutinum
   time_t msec = end.tv_usec-start.tv_usec;
   time_t sec = end.tv_sec-start.tv_sec;
   printf("the array size is: %d\nthe elemet number is: %d\n", length, count);
-  printf("multi-thread with not lock time used:%ld.%lds\n", sec, msec);
+  // printf("multi-thread with not lock time used:%ld.%lds\n", sec, msec);
   printf("multi-thread with  not lock time used:%ld us\n", ((end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec)));
 
 }
@@ -225,12 +223,6 @@ int main()
 
       free(num);
     }
-    // void *num;
-    // generateData(&num, N[6], m, 1);
-    // int *number = (int *)num;
-    // calculate(*(number + 10), number, [6]);
-    // printf("-------------------\n");
-    // multiThreadCalculateExit(*(number + 10), number, N[6], 8);
-    // free(num);
+
     return 0;
 }
