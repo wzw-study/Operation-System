@@ -2,9 +2,10 @@
 title: "homework 1"
 output: "homework_1"
 ---
-# Homework 1
 
----
+# Operating System homework 1
+
+-------
 
 ## platform
 
@@ -17,14 +18,13 @@ output: "homework_1"
 I generate random arrays of integers of different lengths. The execution times of the query elements measured under single process and single thread conditions were used as a control group to measure the execution times under different process and thread conditions.
 
 The parameters are listed in the table below.
-Array type        | Integer array |
+|   information   |            |
 ----------        | -------------
 |Array length     |256, 512, 1024, 2048, 3072, 4096, 8192  |
 Number of processes | 2, 4, 6, 8
 Number of threads |   2, 4, 6, 8
 
 The following list shows the execution times for different array sizes
-<br>
 
 * **Array length: 256**
    Single process execution time: 0.001 (ms). the element number is: 2
