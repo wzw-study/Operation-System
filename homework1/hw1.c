@@ -5,18 +5,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include "hw1.h"
 
-
-
-#define TIC                                                                    \
-  struct timeval start, end;                                                   \
-  gettimeofday(&start, NULL);
-
-#define TOC                                                                    \
-  gettimeofday(&end, NULL);                                                    \
-  double elapsedTime = (end.tv_sec - start.tv_sec) * 1000.0 +                  \
-                       (end.tv_usec - start.tv_usec) / 1000.0;                 \
-  printf("time used: %lf (ms)\n", elapsedTime);
 
 void generateData(void **array, unsigned long n, int m, int flag) {
   /* generate random data
@@ -183,7 +173,7 @@ int main() {
     void *num;
     generateData(&num, N[i], m, 1);
     int *number = (int *)num;
-    printf("--------------array size: %d----------\n", N[i]);
+    printf("--------------array size: %ld----------\n", N[i]);
     printf("One process result\n");
     printf("------------------------\n");
     calculate(*(number + 10), number, N[i]);
